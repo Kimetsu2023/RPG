@@ -18,15 +18,16 @@ import monsters.Slime;
 public class Main {
 
 
+
 	public static void main(String[] args) {
 
 
 
 		System.out.println("★★ ==== 戦いの開始だ！！ ==== ★★");
 
-	 Human human1 =  new Brave("沖田総司","剣");
-	 Human human2 =  new Fighter("金太郎","斧");
-	 Human human3 =  new Wizard("安倍晴明","魔法");
+	 Human human1 = new Brave("沖田総司","剣");
+	 Human human2 = new Fighter("金太郎","斧");
+	 Human human3 = new Wizard("安倍晴明","魔法");
 
 
 		// Brave（勇者）, Fighter（戦士）, Wizard（魔法使い）クラスの各インスタンスを生成
@@ -59,29 +60,31 @@ public class Main {
 		// 勝敗がつくまで無限ループ
 		while (true) {
 
+
 			System.out.printf("\n★ 第%d回戦 ==========\n", count);
 
 			System.out.println("\n[人間のターン！]\n");
 
 			// 人間グループから1人選択
 
-
-				Human human = humans.get(Dice.get(0, humans.size() - 1));
-				System.out.printf("人間グループから 「%s」 のお出ましだ！\n", human.getName());
-
+			Human choiceHuman = humans.get(Dice.get(0, humans.size() - 1));
+			System.out.printf("人間グループから 「%s」 のお出ましだ！\n", choiceHuman.getName());
 
 
 			// モンスターグループから1人選択
-				Monster monster = monsters.get(Dice.get(0, monsters.size() - 1));
-				System.out.printf("モンスターグループから 「%s」 のお出ましだ！\n", monster.getName());
+
+			Monster choiceMonster = monsters.get(Dice.get(0, monsters.size() - 1));
+			System.out.printf("モンスターグループから 「%s」 のお出ましだ！\n", choiceMonster.getName());
+
+
 			// 選ばれた人間が、選ばれたモンスターを攻撃
-			human.attack(monster);
+			choiceHuman.attack(choiceMonster);
 			// モンスターのHPが0以下になれば、モンスターは倒れ、そのモンスターをモンスターグループから削除
-           if(monster.getHp() <= 0){
+           if(choiceMonster.getHp() <= 0){
 
-        	   monsters.remove(monster);
+        	   monsters.remove(choiceMonster);
 
-           System.out.println("★ 「" + monster.getName() + "」は倒れた。");
+           System.out.println("★ 「" + choiceMonster.getName() + "」は倒れた。");
            }
 			// モンスターグループに誰もいなくなれば、人間グループの勝利
            if(monsters.isEmpty()) {
@@ -89,24 +92,26 @@ public class Main {
 
         	   System.out.println("人間達は勝利した!!");
         	   break;
-           }
 
+           }
 			System.out.println("\n[モンスターのターン！]\n");
 
 			// 人間グループから1人選択
 			humans.get(Dice.get(0, humans.size() - 1));
-			System.out.printf("人間グループから 「%s」 のお出ましだ！\n", human.getName());
+			System.out.printf("人間グループから 「%s」 のお出ましだ！\n", choiceHuman.getName());
+
 			// モンスターグループから1人選択
-			monsters.get(Dice.get(0, monsters.size() - 1));
-			System.out.printf("モンスターグループから 「%s」 のお出ましだ！\n", monster.getName());
+			 monsters.get(Dice.get(0, monsters.size() - 1));
+			System.out.printf("モンスターグループから 「%s」 のお出ましだ！\n", choiceMonster.getName());
+
 			// 選ばれたモンスターが、選ばれた人間を攻撃
-			monster.attack(human);
+			choiceMonster.attack(choiceHuman);
 			// 人間のHPが0以下になれば、人間は倒れ、その人間をモンスターグループから削除
-			if(human.getHp() <= 0){
-	        	   humans.remove(human);
+			if(choiceHuman.getHp() <= 0){
+	        	   humans.remove(choiceHuman);
 
 
-			System.out.println("★ 「" + human.getName() + "」は倒れた。");
+			System.out.println("★ 「" + choiceHuman.getName() + "」は倒れた。");
 			}
 			// 人間グループに誰もいなくなれば、人間グループの敗北
 			if(humans.isEmpty()) {
@@ -127,12 +132,15 @@ public class Main {
 
 	}
 
+
+
+
 	// 引数でもらった人間グループリストからランダムに1人を選択し、その結果を戻り値とするメソッド
-	public static Human choiceHuman(List<Human> humans) {
-		Human human = humans.get(Dice.get(0, humans.size() - 1));
-		System.out.printf("人間グループから 「%s」 のお出ましだ！\n", human.getName());
-		return human;
-	}
+		public static Human choiceHuman(List<Human> humans) {
+			Human human = humans.get(Dice.get(0, humans.size() - 1));
+			System.out.printf("人間グループから 「%s」 のお出ましだ！\n", human.getName());
+			return human;
+		}
 
 	// 引数でもらったモンスターグループリストからランダムに1人を選択し、その結果を戻り値とするメソッド
 	public static Monster choiceMonster(List<Monster> monsters) {

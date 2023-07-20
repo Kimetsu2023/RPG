@@ -17,10 +17,10 @@ public abstract class Human extends Living {
 		int num = Dice.get(1, 10)*offensive;
 
 		target.hp = target.getHp() - num;
-       
+
 		offensive = getOffensive() -1;
 
-		System.out.println("「" + getName() + "」が" + "「" + getWeapon() + "」で攻撃！" + "「" + target.name + "」に" +num + "のダメージを与えた。しかし自分の攻撃力も1減少した。");
+		System.out.println("「" + getName() + "」が" + "「" + getWeapon() + "」で攻撃！" + "「" + target.name + "」に" +num + "のダメージを与えた。\r\nしかし自分の攻撃力も1減少した。");
 
 		}
 
