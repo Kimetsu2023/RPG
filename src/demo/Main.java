@@ -67,24 +67,21 @@ public class Main {
 
 			// 人間グループから1人選択
 
-			Human choiceHuman = humans.get(Dice.get(0, humans.size() - 1));
-			System.out.printf("人間グループから 「%s」 のお出ましだ！\n", choiceHuman.getName());
-
+			Human human = choiceHuman(humans);
 
 			// モンスターグループから1人選択
 
-			Monster choiceMonster = monsters.get(Dice.get(0, monsters.size() - 1));
-			System.out.printf("モンスターグループから 「%s」 のお出ましだ！\n", choiceMonster.getName());
+			Monster monster = choiceMonster(monsters);
 
 
 			// 選ばれた人間が、選ばれたモンスターを攻撃
-			choiceHuman.attack(choiceMonster);
+			human.attack(monster);
 			// モンスターのHPが0以下になれば、モンスターは倒れ、そのモンスターをモンスターグループから削除
-           if(choiceMonster.getHp() <= 0){
+           if(monster.getHp() <= 0){
 
-        	   monsters.remove(choiceMonster);
+        	   monsters.remove(monster);
 
-           System.out.println("★ 「" + choiceMonster.getName() + "」は倒れた。");
+           System.out.println("★ 「" + monster.getName() + "」は倒れた。");
            }
 			// モンスターグループに誰もいなくなれば、人間グループの勝利
            if(monsters.isEmpty()) {
@@ -97,21 +94,18 @@ public class Main {
 			System.out.println("\n[モンスターのターン！]\n");
 
 			// 人間グループから1人選択
-			humans.get(Dice.get(0, humans.size() - 1));
-			System.out.printf("人間グループから 「%s」 のお出ましだ！\n", choiceHuman.getName());
-
+			human = choiceHuman(humans);
 			// モンスターグループから1人選択
-			 monsters.get(Dice.get(0, monsters.size() - 1));
-			System.out.printf("モンスターグループから 「%s」 のお出ましだ！\n", choiceMonster.getName());
+			monster = choiceMonster(monsters);
 
 			// 選ばれたモンスターが、選ばれた人間を攻撃
-			choiceMonster.attack(choiceHuman);
+			monster.attack(human);
 			// 人間のHPが0以下になれば、人間は倒れ、その人間をモンスターグループから削除
-			if(choiceHuman.getHp() <= 0){
-	        	   humans.remove(choiceHuman);
+			if(human.getHp() <= 0){
+	        	   humans.remove(human);
 
 
-			System.out.println("★ 「" + choiceHuman.getName() + "」は倒れた。");
+			System.out.println("★ 「" + human.getName() + "」は倒れた。");
 			}
 			// 人間グループに誰もいなくなれば、人間グループの敗北
 			if(humans.isEmpty()) {
@@ -129,8 +123,9 @@ public class Main {
 
 		// 最後に各グループの状態を一覧表示してプログラム終了
 		showGroupInfos(humans, monsters);
+			}
 
-	}
+
 
 
 
